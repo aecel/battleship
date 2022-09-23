@@ -8,6 +8,7 @@ const newGameboard = ({
   hitShip = "x",
   missShip = "~",
   id = null,
+  player = null,
 }) => {
   let boardArray = []
   let ships = []
@@ -18,6 +19,7 @@ const newGameboard = ({
     boardArray.push(Array(width).fill(unhit))
   }
 
+  const getPlayer = () => player
   const getShipsSunk = () => {
     return ships.map((ship) => {
       return ship.isSunk()
@@ -79,6 +81,15 @@ const newGameboard = ({
   }
 
   const placeShip = (ship, [row, column]) => {
+    if (!ship) {
+      return "Cannot place ship"
+    }
+    if (!Number.isInteger(row) || !Number.isInteger(column)) {
+      return "Cannot place ship"
+    }
+    if (!boardArray[row] || !boardArray[row][column]) {
+      return "Cannot place ship"
+    }
     if (ship.getOrientation() == "vertical") {
       if (height < ship.getLength() || height - row < ship.getLength()) {
         return "Cannot place ship"
@@ -179,6 +190,7 @@ const newGameboard = ({
     getShipsCoords,
     getHitArray,
     getHitArrays,
+    getPlayer
   }
 }
 

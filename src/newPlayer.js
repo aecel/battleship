@@ -1,12 +1,16 @@
 import getRandomInt from "./getRandomInt.js"
 
-const newPlayer = ({ name = null, ai = false }) => {
+const newPlayer = ({ name = null, ai = false, ready = false }) => {
   if (!name && ai) {
     name = "Hal 9000"
   }
 
-  const getAi = () => ai
+  const isAI = () => ai
   const getName = () => name
+  const isReady = () => ready
+  const setToReady = () => {
+    ready = true
+  }
 
   const takeTurn = (gameBoard, [row, column]) => {
     if (ai) {
@@ -37,7 +41,7 @@ const newPlayer = ({ name = null, ai = false }) => {
     }
   }
 
-  return { takeTurn, getName, getAi }
+  return { takeTurn, getName, isAI, isReady, setToReady }
 }
 
 export default newPlayer
