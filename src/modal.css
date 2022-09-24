@@ -25,9 +25,9 @@
 
 /* Modal Content/Box */
 .modal-content {
-  font-size: 0.9rem;
+  font-size: 1rem;
   /* background-color: #fefefe; */
-  background-color: rgb(33, 33, 33);
+  background-color: rgba(59, 18, 59, 0.61);
   border-radius: 20px;
   border: none;
   margin: 15% auto; /* 15% from the top and centered */
@@ -45,24 +45,57 @@
   margin-top: 0;
 }
 
-.change-orientation {
+button {
   all: unset;
+  font-size: 1rem;
+  font-family: "Passion", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin-top: 16px;
-  background-color: rgb(19, 19, 19);
+  background-color: #1e081e;
   border-radius: 10px;
   border: none;
   padding: 10px 20px;
   cursor: pointer;
 }
 
-.change-orientation:hover {
-  background-color: rgb(25, 25, 25);
+button:hover {
+  background-color: #611d61;
 }
 
-.change-orientation:active {
-  background-color: rgb(68, 68, 68);
+button:active {
+  background-color: #a030a0;
 }
 
 .to-place {
-  background-color: rgb(81, 81, 81);
+  background-color: rgb(246, 200, 241);
+}
+
+/* For the form */
+label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  display: block;
+  font-size: 10px;
+  font-weight: bold;
+
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+input[type="text"] {
+
+  font-size: 1rem;
+  /* margin-bottom: 20px; */
+  padding: 5px 10px;
+  border-radius: 10px;
+  border: none;
+  box-shadow: 3px 3px rgba(0, 0, 0, 0.148) inset;
+  background-color: rgb(236, 236, 236);
+  width: 93%;
+
+}
+
+input[type="checkbox"] {
+  accent-color: #a030a0;
+  margin-right: 10px;
 }

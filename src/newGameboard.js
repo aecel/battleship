@@ -3,10 +3,10 @@ import arrayIncludes from "./arrayIncludes.js"
 const newGameboard = ({
   height = 10,
   width = 10,
-  unhit = "o",
-  shipHere = "s",
-  hitShip = "x",
-  missShip = "~",
+  unknownTile = "o",
+  shipTile = "s",
+  hitTile = "x",
+  missTile = "~",
   id = null,
   player = null,
 }) => {
@@ -14,9 +14,9 @@ const newGameboard = ({
   let ships = []
 
   // I can't use the code below because placeShip will not work with it
-  // const boardRow = Array(width).fill(unhit)
+  // const boardRow = Array(width).fill(unknownTile)
   for (let i = 0; i < height; i++) {
-    boardArray.push(Array(width).fill(unhit))
+    boardArray.push(Array(width).fill(unknownTile))
   }
 
   const getPlayer = () => player
@@ -50,7 +50,7 @@ const newGameboard = ({
     })
   }
 
-  const checkNeighborsUnhit = (boardArray, [row, column], unhit) => {
+  const checkNeighborsUnknownTile = (boardArray, [row, column], unknownTile) => {
     const up = [row - 1, column]
     const down = [row + 1, column]
     const left = [row, column - 1]
@@ -58,7 +58,7 @@ const newGameboard = ({
     const directions = [up, down, left, right]
     for (const [row, column] of directions) {
       if (boardArray[row] && boardArray[row][column]) {
-        if (boardArray[row][column] != unhit) {
+        if (boardArray[row][column] != unknownTile) {
           return false
         }
       }
@@ -73,10 +73,10 @@ const newGameboard = ({
   const getHeight = () => height
   const getWidth = () => width
   const getBoardArray = () => boardArray
-  const getUnhit = () => unhit
-  const getShipHere = () => shipHere
-  const getHitShip = () => hitShip
-  const getMissShip = () => missShip
+  const getUnknownTile = () => unknownTile
+  const getShipTile = () => shipTile
+  const getHitTile = () => hitTile
+  const getMissTile = () => missTile
   const getHitArray = () => hitArray
 
   const consoleGameboard = () => {
@@ -101,16 +101,16 @@ const newGameboard = ({
         return "Cannot place ship"
       } else {
         for (let i = 0; i < ship.getLength(); i++) {
-          if (boardArray[row + i][column] != unhit) {
+          if (boardArray[row + i][column] != unknownTile) {
             return "Cannot place ship"
           } else if (
-            !checkNeighborsUnhit(boardArray, [row + i, column], unhit)
+            !checkNeighborsUnknownTile(boardArray, [row + i, column], unknownTile)
           ) {
             return "Cannot place ship"
           }
         }
         for (let i = 0; i < ship.getLength(); i++) {
-          boardArray[row + i][column] = shipHere
+          boardArray[row + i][column] = shipTile
         }
         ship.changeCoord([row, column])
         ships.push(ship)
@@ -121,16 +121,16 @@ const newGameboard = ({
         return "Cannot place ship"
       } else {
         for (let i = 0; i < ship.getLength(); i++) {
-          if (boardArray[row][column + i] != unhit) {
+          if (boardArray[row][column + i] != unknownTile) {
             return "Cannot place ship"
           } else if (
-            !checkNeighborsUnhit(boardArray, [row, column + i], unhit)
+            !checkNeighborsUnknownTile(boardArray, [row, column + i], unknownTile)
           ) {
             return "Cannot place ship"
           }
         }
         for (let i = 0; i < ship.getLength(); i++) {
-          boardArray[row][column + i] = shipHere
+          boardArray[row][column + i] = shipTile
         }
         ship.changeCoord([row, column])
         ships.push(ship)
@@ -142,8 +142,8 @@ const newGameboard = ({
   }
 
   const receiveAttack = ([row, column]) => {
-    if (boardArray[row][column] == shipHere) {
-      boardArray[row][column] = hitShip
+    if (boardArray[row][column] == shipTile) {
+      boardArray[row][column] = hitTile
       for (const ship of ships) {
         const hitCoord = [row, column]
         const shipCoords = ship.getCoords()
@@ -160,8 +160,8 @@ const newGameboard = ({
         }
       }
       return boardArray
-    } else if (boardArray[row][column] == unhit) {
-      boardArray[row][column] = missShip
+    } else if (boardArray[row][column] == unknownTile) {
+      boardArray[row][column] = missTile
       return boardArray
     } else {
       return "Area already hit"
@@ -183,10 +183,10 @@ const newGameboard = ({
     getHeight,
     getWidth,
     getBoardArray,
-    getUnhit,
-    getHitShip,
-    getMissShip,
-    getShipHere,
+    getUnknownTile,
+    getHitTile,
+    getMissTile,
+    getShipTile,
     consoleGameboard,
     placeShip,
     receiveAttack,

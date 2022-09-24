@@ -30,8 +30,8 @@ it("displays a big gameboard", () => {
   ])
 })
 
-it("displays a gameboard with different unhit", () => {
-  const board = newGameboard({ height: 2, width: 2, unhit: "lmao" })
+it("displays a gameboard with different unknownTile", () => {
+  const board = newGameboard({ height: 2, width: 2, unknownTile: "lmao" })
   expect(board.consoleGameboard()).toEqual([
     ["lmao", "lmao"],
     ["lmao", "lmao"],

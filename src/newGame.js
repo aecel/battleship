@@ -5,9 +5,12 @@ import renderer from "./renderer.js"
 import newPlayer from "./newPlayer.js"
 
 // Path goes like this:
-// startGame -> placeShipsAI or placeShipsPlayer
+// startGame -> player1PlaceShips -> placeShipsAI or placeShipsPlayer
+// player2PlaceShips -> placeShipsAI or placeShipsPlayer
 // -> startGameLoop -> playerTurnLoop
 // -> gameEnds
+
+// Note: myRenderer.draw removes event listeners
 
 const newGame = ([player1, player2], [height, width]) => {
   const board1 = newGameboard({
@@ -26,8 +29,12 @@ const newGame = ([player1, player2], [height, width]) => {
   let winner = newPlayer({ name: "NOBODY" })
 
   const gameEnds = () => {
+    
     myRenderer.drawBoards(board1, board2)
+    console.log(`${winner.getName()} wins`)
     console.log("Game Over")
+    const turnText = `${winner.getName()} wins!`
+    myRenderer.changeTurnText(turnText)
   }
 
   const isGameOver = () => {
@@ -53,7 +60,6 @@ const newGame = ([player1, player2], [height, width]) => {
       }
       player.takeTurn(board, [row, column])
       if (isGameOver()) {
-        console.log(`${winner.getName()} wins`)
         gameEnds()
         return null
       }
@@ -76,7 +82,9 @@ const newGame = ([player1, player2], [height, width]) => {
       playerTurnLoop(nextPlayer, nextBoard)
     }
 
-    console.log(`${player.getName()}'s turn`)
+    const turnText = `Your turn, ${player.getName()}`
+    myRenderer.changeTurnText(turnText)
+    
     if (player.isAI()) {
       boardAttacked()
     } else {
@@ -116,7 +124,7 @@ const newGame = ([player1, player2], [height, width]) => {
 
     gameBoard.getPlayer().setToReady()
     if (!player2.isReady()) {
-      placeShips2()
+      player2PlaceShips()
     }
     startGameLoop()
     return gameBoard.getBoardArray()
@@ -132,12 +140,8 @@ const newGame = ([player1, player2], [height, width]) => {
         gameBoard.placeShip(ships[placeShipCounter], [row, column]) !=
         "Cannot place ship"
       ) {
-        myRenderer.drawPlacingBoard(
-          modalId,
-          gameBoard,
-          "place" + gameBoard.getId()
-        )
         placeShipCounter++
+
         if (placeShipCounter == ships.length) {
           placeShipCounter = 0
 
@@ -146,7 +150,7 @@ const newGame = ([player1, player2], [height, width]) => {
 
           gameBoard.getPlayer().setToReady()
           if (!player2.isReady()) {
-            placeShips2()
+            player2PlaceShips()
           }
           startGameLoop()
           return null
@@ -155,17 +159,18 @@ const newGame = ([player1, player2], [height, width]) => {
       }
     }
 
-    myRenderer.shipButtonListener(ships[placeShipCounter], modalId)
-
-    myRenderer.tileListeners(shipPlaced, "place" + gameBoard.getId())
+    myRenderer.drawPlacingBoard(modalId, gameBoard, "place" + gameBoard.getId())
     myRenderer.tileHoverListeners(
       ships[placeShipCounter],
       "place" + gameBoard.getId()
     )
+
+    myRenderer.shipButtonListener(ships[placeShipCounter], modalId)
+    myRenderer.tileListeners(shipPlaced, "place" + gameBoard.getId())
   }
 
   const placeShipsPlayer = (ships, gameBoard, modalId) => {
-    myRenderer.showPlacingBoard(modalId, gameBoard, "place" + gameBoard.getId())
+    myRenderer.showModal(modalId)
     placeShipsLoop(ships, gameBoard, modalId)
   }
 
@@ -177,7 +182,7 @@ const newGame = ([player1, player2], [height, width]) => {
     board2.consoleGameboard()
   }
 
-  const placeShips1 = () => {
+  const player1PlaceShips = () => {
     const ship1 = newShip({ name: "Carrier", length: 5 })
     const ship2 = newShip({ name: "Battleship", length: 4 })
     const ship3 = newShip({ name: "Destroyer", length: 3 })
@@ -193,7 +198,7 @@ const newGame = ([player1, player2], [height, width]) => {
     }
   }
 
-  const placeShips2 = () => {
+  const player2PlaceShips = () => {
     const shippy1 = newShip({ name: "Carrier2", length: 5 })
     const shippy2 = newShip({ name: "Battleship2", length: 4 })
     const shippy3 = newShip({ name: "Destroyer2", length: 3 })
@@ -210,9 +215,10 @@ const newGame = ([player1, player2], [height, width]) => {
   }
 
   const startGame = () => {
+    myRenderer.setPlayerNames(player1, player2)
     myRenderer.drawBoards(board1, board2)
 
-    placeShips1()
+    player1PlaceShips()
 
     consoleBoards()
     return [board1, board2]

@@ -6,7 +6,13 @@ const newPlayer = ({ name = null, ai = false, ready = false }) => {
   }
 
   const isAI = () => ai
+  const changeAI = (value) => {
+    ai = value
+  }
   const getName = () => name
+  const changeName = (value) => {
+    name = value
+  }
   const isReady = () => ready
   const setToReady = () => {
     ready = true
@@ -17,16 +23,16 @@ const newPlayer = ({ name = null, ai = false, ready = false }) => {
       const height = gameBoard.getHeight()
       const width = gameBoard.getWidth()
       const boardArray = gameBoard.getBoardArray()
-      const unhit = gameBoard.getUnhit()
-      const shipHere = gameBoard.getShipHere()
+      const unknownTile = gameBoard.getUnknownTile()
+      const shipTile = gameBoard.getShipTile()
 
       let rowAi = getRandomInt(width)
       let columnAi = getRandomInt(height)
 
       let whileCounter = 0
       while (
-        boardArray[rowAi][columnAi] != unhit &&
-        boardArray[rowAi][columnAi] != shipHere
+        boardArray[rowAi][columnAi] != unknownTile &&
+        boardArray[rowAi][columnAi] != shipTile
       ) {
         rowAi = getRandomInt(width)
         columnAi = getRandomInt(height)
@@ -41,7 +47,7 @@ const newPlayer = ({ name = null, ai = false, ready = false }) => {
     }
   }
 
-  return { takeTurn, getName, isAI, isReady, setToReady }
+  return { takeTurn, getName, isAI, isReady, setToReady, changeName, changeAI }
 }
 
 export default newPlayer
