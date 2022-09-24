@@ -10,6 +10,7 @@
 
 /* The Modal (background) */
 .modal {
+  color: rgb(237, 237, 237);
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 3; /* Sit on top */
@@ -24,35 +25,44 @@
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
+  font-size: 0.9rem;
+  /* background-color: #fefefe; */
+  background-color: rgb(33, 33, 33);
   border-radius: 20px;
-  color: gray;
+  border: none;
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
-  border: 1px solid #888;
+  /* border: 1px solid rgb(4, 4, 4); */
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.27);
   width: 320px; /* Could be more or less, depending on screen size */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-/* The Close Button */
-/* .close-modal {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  position: relative;
-  top: -15px;
-  right: -5px;
-  display: flex;
-  align-items: baseline;
-  justify-content: baseline;
+.placetext {
+  margin-top: 0;
 }
 
-.close-modal:hover,
-.close-modal:focus {
-  color: black;
-  text-decoration: none;
+.change-orientation {
+  all: unset;
+  margin-top: 16px;
+  background-color: rgb(19, 19, 19);
+  border-radius: 10px;
+  border: none;
+  padding: 10px 20px;
   cursor: pointer;
-} */
+}
+
+.change-orientation:hover {
+  background-color: rgb(25, 25, 25);
+}
+
+.change-orientation:active {
+  background-color: rgb(68, 68, 68);
+}
+
+.to-place {
+  background-color: rgb(81, 81, 81);
+}

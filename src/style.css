@@ -18,6 +18,7 @@ body {
   width: 100%;
   padding: 0;
   margin: 0;
+  background-color: rgb(29, 29, 29);
 }
 
 /* Usual background, change the URL */
@@ -58,7 +59,7 @@ main {
   gap: 100px;
   align-items: center;
   justify-content: center;
-  background-color: var(--light-gray);
+  background-color: rgb(29, 29, 29);
 }
 
 .grid {
@@ -109,7 +110,7 @@ main {
 footer {
   font-size: 10px;
   text-align: center;
-  background-color: #1a1a1ac9;
+  background-color: #1a1a1ae4;
   color: white;
   padding-left: var(--gap);
   padding-right: var(--gap);

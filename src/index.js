@@ -8,8 +8,7 @@ const height = 10
 const width = 10
 
 const player1 = newPlayer({ name: "Ace" })
-const player2 = newPlayer({ name: "AceBot"})
+const player2 = newPlayer({ name: "AceBot", ai: true })
 
 const myGame = newGame([player1, player2], [height, width])
 myGame.startGame()
-// myGame.gameLoop()

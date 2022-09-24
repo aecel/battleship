@@ -19,6 +19,15 @@ const newShip = ({
   const changeOrientation = (value) => {
     orientation = value
   }
+
+  const toggleOrientation = () => {
+    if (orientation == "vertical") {
+      orientation = "horizontal"
+    } else {
+      orientation = "vertical"
+    }
+  }
+
   const changeName = (value) => {
     name = value
   }
@@ -72,6 +81,7 @@ const newShip = ({
     hit,
     isSunk,
     changeCoord,
+    toggleOrientation,
   }
 }
 

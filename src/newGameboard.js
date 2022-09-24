@@ -44,6 +44,12 @@ const newGameboard = ({
     })
   }
 
+  const getOrientations = () => {
+    return ships.map((ship) => {
+      return ship.getOrientation()
+    })
+  }
+
   const checkNeighborsUnhit = (boardArray, [row, column], unhit) => {
     const up = [row - 1, column]
     const down = [row + 1, column]
@@ -190,7 +196,8 @@ const newGameboard = ({
     getShipsCoords,
     getHitArray,
     getHitArrays,
-    getPlayer
+    getPlayer,
+    getOrientations,
   }
 }
 
