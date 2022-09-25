@@ -53,7 +53,7 @@ const renderer = () => {
     const placeText = document.createElement("p")
     placeText.classList.add("placetext")
     placeText.id = "placetext" + modalId.slice(-1)
-    placeText.textContent = `Place your ship, ${board.getPlayer().getName()}`
+    placeText.textContent = `Place your ships, ${board.getPlayer().getName()}`
     modalContent.appendChild(placeText)
 
     const grid = document.createElement("div")

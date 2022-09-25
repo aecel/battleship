@@ -3,6 +3,7 @@
 :root {
   font-family: "Passion", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: white;
+  font-weight: bold;
   --gap: 24px;
   --radius: 15px;
   --shadow: 5px 5px rgba(0, 0, 0, 0.27);
@@ -129,6 +130,12 @@ h1 {
 
 .clickable:active {
   background-color: rgb(255, 129, 240);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* Usual footer */

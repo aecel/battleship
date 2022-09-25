@@ -87,8 +87,10 @@ const newGame = ([player1, player2], [height, width]) => {
     
     if (player.isAI()) {
       boardAttacked()
+      return null
     } else {
       myRenderer.tileListeners(boardAttacked, board.getId())
+      return null
     }
   }
 
