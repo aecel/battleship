@@ -11,12 +11,19 @@ const newGameboard = ({
   player = null,
 }) => {
   let boardArray = []
+  let emptyBoardArray = []
   let ships = []
 
   // I can't use the code below because placeShip will not work with it
   // const boardRow = Array(width).fill(unknownTile)
   for (let i = 0; i < height; i++) {
     boardArray.push(Array(width).fill(unknownTile))
+    emptyBoardArray.push(Array(width).fill(unknownTile))
+  }
+
+  const emptyShips = () => {
+    ships = []
+    boardArray = emptyBoardArray
   }
 
   const getPlayer = () => player
@@ -198,6 +205,7 @@ const newGameboard = ({
     getHitArrays,
     getPlayer,
     getOrientations,
+    emptyShips,
   }
 }
 

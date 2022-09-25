@@ -1,5 +1,6 @@
 import style from "./style.css"
 import modal from "./modal.css"
+import animations from "./animations.css"
 import renderer from "./renderer.js"
 import initializeGame from "./initializeGame.js"
 

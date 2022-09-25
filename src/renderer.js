@@ -32,6 +32,8 @@ const renderer = () => {
           // boxDiv.style.backgroundColor = "green"
         } else if (letter == board.getHitTile()) {
           boxDiv.classList.add("hit-tile")
+          // boxDiv.classList.add("shake")
+          // boxDiv.classList.add("enlarge")
         } else if (letter == board.getMissTile()) {
           boxDiv.classList.add("miss-tile")
         } else if (letter == board.getUnknownTile()) {
@@ -67,6 +69,11 @@ const renderer = () => {
     button.classList.add("change-orientation")
     button.textContent = "Change ship orientation"
     modalContent.appendChild(button)
+
+    const randButton = document.createElement("button")
+    randButton.classList.add("randomize")
+    randButton.textContent = "Randomize and Start"
+    modalContent.appendChild(randButton)
 
     const boardArray = board.getBoardArray()
 
@@ -217,6 +224,14 @@ const renderer = () => {
     button.addEventListener("click", ship.toggleOrientation)
   }
 
+  const randButtonListener = (modalId, func) => {
+    const button = document.querySelector(
+      `#${modalId} .modal-content .randomize`
+    )
+
+    button.addEventListener("click", func)
+  }
+
   const setPlayerNames = (player1, player2) => {
     const playerName1 = document.getElementById("player1")
     playerName1.textContent = `${player1.getName()}`
@@ -259,6 +274,18 @@ const renderer = () => {
     })
   }
 
+  const animateTile = (tileClass, board, [row, column]) => {
+    const boxes = document.querySelectorAll(`#${board.getId()} > .${tileClass}`)
+    boxes.forEach((box) => {
+      if (box.dataset.row == row && box.dataset.column == column) {
+        box.classList.toggle("shake")
+        box.classList.toggle("enlarge")
+        // box.classList.remove("shake")
+        // box.classList.remove("enlarge")
+      }
+    })
+  }
+
   return {
     drawBoards,
     drawBoard,
@@ -272,6 +299,8 @@ const renderer = () => {
     setPlayerNames,
     changeTurnText,
     playButtonListener,
+    animateTile,
+    randButtonListener,
   }
 }
 

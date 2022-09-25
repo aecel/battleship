@@ -1,0 +1,80 @@
+/* .shake {
+  animation-name: shakeIt;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-duration: 100ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes shakeIt {
+  from {
+    transform: rotate(5 deg);
+  }
+  to {
+    transform: rotate(-2deg);
+  }
+} */
+
+.enlarge {
+  animation-name: plungeIt;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-duration: 600ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes plungeIt {
+  0% {
+    transform: scale(0.3) rotate(0deg);
+    background-color: rgba(0, 0, 0, 0.186);
+  }
+
+  20% {
+    transform: scale(3) rotate(1turn);
+    background-color: orangered;
+  }
+
+  40% {
+    transform: scale(0.3) rotate(0deg);
+    background-color: rgb(221, 149, 48);
+  }
+
+  60% {
+    transform: scale(2) rotate(1turn);
+    background-color: white;
+  }
+
+  80% {
+    transform: scale(0.3) rotate(1turn);
+    background-color: rgb(221, 149, 48);
+  }
+
+  100% {
+    transform: scale(1) rotate(0deg);
+    background-color: rgb(221, 149, 48);
+  }
+}
+
+/* @keyframes plungeIt {
+  0% {
+    transform: scale(3) rotate(50 deg);
+  }
+
+  30% {
+    transform: scale(0.3) rotate(-50 deg);
+  }
+
+  60% {
+    transform: scale(2) rotate(50 deg);
+  }
+
+  80% {
+    transform: scale(0.3) rotate(-50 deg);
+  }
+
+  100% {
+    transform: scale(1) rotate(50 deg);
+  }
+} */

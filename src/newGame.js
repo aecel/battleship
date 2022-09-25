@@ -29,8 +29,9 @@ const newGame = ([player1, player2], [height, width]) => {
   let winner = newPlayer({ name: "NOBODY" })
 
   const gameEnds = () => {
-    
-    myRenderer.drawBoards(board1, board2)
+    setTimeout(() => {
+      myRenderer.drawBoards(board1, board2)
+    }, 500)
     console.log(`${winner.getName()} wins`)
     console.log("Game Over")
     const turnText = `${winner.getName()} wins!`
@@ -50,24 +51,54 @@ const newGame = ([player1, player2], [height, width]) => {
     return false
   }
 
+  const AIChooseCoord = (gameBoard) => {
+    const height = gameBoard.getHeight()
+    const width = gameBoard.getWidth()
+    const boardArray = gameBoard.getBoardArray()
+    const unknownTile = gameBoard.getUnknownTile()
+    const shipTile = gameBoard.getShipTile()
+
+    let rowAi = getRandomInt(width)
+    let columnAi = getRandomInt(height)
+
+    let whileCounter = 0
+    while (
+      boardArray[rowAi][columnAi] != unknownTile &&
+      boardArray[rowAi][columnAi] != shipTile
+    ) {
+      rowAi = getRandomInt(width)
+      columnAi = getRandomInt(height)
+      whileCounter++
+      if (whileCounter >= height * width) {
+        break
+      }
+    }
+
+    return [rowAi, columnAi]
+  }
+
   const playerTurnLoop = (player, board) => {
     const boardAttacked = (e) => {
-      let row = 0
-      let column = 0
+      let row
+      let column
       if (!player.isAI()) {
         row = Number(e.target.dataset.row)
         column = Number(e.target.dataset.column)
+      } else {
+        ;[row, column] = AIChooseCoord(board)
       }
       player.takeTurn(board, [row, column])
+
+      myRenderer.drawBoard(board, board.getId())
+      myRenderer.animateTile("hit-tile", board, [row, column])
+      board.consoleGameboard()
+      console.log(board.getHitArrays())
+      console.log(board.getOrientations())
+
       if (isGameOver()) {
         gameEnds()
         return null
       }
-
-      myRenderer.drawBoard(board, board.getId())
-      board.consoleGameboard()
-      console.log(board.getHitArrays())
-      console.log(board.getOrientations())
 
       let nextBoard
       let nextPlayer
@@ -84,7 +115,7 @@ const newGame = ([player1, player2], [height, width]) => {
 
     const turnText = `Your turn, ${player.getName()}`
     myRenderer.changeTurnText(turnText)
-    
+
     if (player.isAI()) {
       boardAttacked()
       return null
@@ -168,6 +199,11 @@ const newGame = ([player1, player2], [height, width]) => {
     )
 
     myRenderer.shipButtonListener(ships[placeShipCounter], modalId)
+    myRenderer.randButtonListener(modalId, () => {
+      gameBoard.emptyShips()
+      placeShipsAI(ships, gameBoard)
+      myRenderer.hideModal(modalId)
+    })
     myRenderer.tileListeners(shipPlaced, "place" + gameBoard.getId())
   }
 

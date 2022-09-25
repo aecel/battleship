@@ -3,7 +3,7 @@
 :root {
   font-family: "Passion", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: white;
-  font-weight: bold;
+  /* font-weight: bold; */
   --gap: 24px;
   --radius: 15px;
   --shadow: 5px 5px rgba(0, 0, 0, 0.27);
