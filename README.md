@@ -20,3 +20,5 @@ After someone wins, they keep going, so you have two winning boards at the end.
 3. Sounds? With an option to mute
 
 4. More animations?
+
+5. Better placing ships UI for mobile (Drag and drop or something like that)
